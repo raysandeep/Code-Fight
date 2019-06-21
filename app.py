@@ -17,7 +17,7 @@ def index():
 
 @app.route('/api/say_name', methods=['POST'])
 def say_name():
-    token = "9d0c1b4ee351e3e9aadb462399e4e77434467180"
+    token = "Your Token"
     json = request.get_json()
     org = json['first_name']
     org1 = json['last_name']
@@ -38,7 +38,7 @@ def say_name():
 
 @app.route('/api/contribution', methods=['POST'])
 def contribution():
-    token = "9d0c1b4ee351e3e9aadb462399e4e77434467180"
+    token = "Your Token"
     json = request.get_json()
     name = json['first_name']
     org = json['last_name']
