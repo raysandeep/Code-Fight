@@ -8,8 +8,8 @@
             <br/>
             <input type="submit" value="submit" />
         </form>
-        <br>
-        <br>
+        <br/>
+        <br/>
         <form id="con_form">
             <label>Name :</label><input type="text" name="first_name"/>
             <br/>
@@ -17,7 +17,16 @@
             <br/>
             <input type="submit" value="submit" />
         </form>
-        
+        <br/>
+        <br/>
+        <form id="compare_form">
+            <label>Name :</label><input type="text" name="first_name"/>
+            <br/>
+            <label>Org 1 :</label><input type="text" name="org1"/>
+            <br/>
+            <br/>
+            <input type="submit" value="submit" />
+        </form>
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script type="text/javascript">
             $('#name_form').submit(function(e) {
@@ -49,6 +58,37 @@
                         }
                     });
                 });
+
+                $('#compare_form').submit(function(e) {
+                    e.preventDefault();
+
+                    var data = {};
+                    var Form = this;
+
+                    $.each(this.elements, function(i, v) {
+                        var input = $(v);
+                        data[input.attr("name")] = input.val();
+                        delete data["undefined"];
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/compare',
+                        dataType: 'json',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
+                        context: Form,
+                        success: function(callback) {
+                            console.log(callback);
+                            // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                            $(this).text(callback.first_name + callback.last_name  + '!');
+                        },
+                        error: function() {
+                            $(this).html("error!");
+                        }
+                    });
+                });
+
                 $('#con_form').submit(function(e) {
                     e.preventDefault();
 
