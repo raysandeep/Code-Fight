@@ -4,7 +4,6 @@ import os
 import sys
 import redis
 from utility import utility, cron
-from dotenv import load_dotenv
 import requests
 from requests.exceptions import HTTPError
 
